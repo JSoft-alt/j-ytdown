@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+html { background: #F7FAF7; }
+body { min-height: 100vh; color: #16302A; background: radial-gradient(circle at 10% 0%, #eaf7eb 0, transparent 28rem), #F7FAF7; }
+button, input, select { font: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #C4E0C8; outline-offset: 3px; }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.skeleton { overflow: hidden; position: relative; background: #E8F1E9; }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); animation: shimmer 1.4s infinite; }
