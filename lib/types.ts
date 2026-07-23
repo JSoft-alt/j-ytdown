@@ -1,7 +1,7 @@
 export type MediaFormat = "mp4" | "mp3" | "m4a";
 export type Quality = "1080" | "720" | "480" | "best";
 
-export type ResolveRequest = { url: string; format: MediaFormat; quality: Quality };
+export type DownloadRequest = { url: string; format: MediaFormat; quality: Quality };
 export type MediaItem = {
   id: string;
   sourceUrl: string;
@@ -16,4 +16,4 @@ export type MediaItem = {
   estimatedSize?: string;
 };
 
-export type ResolveResponse = { item: MediaItem };
+export type DownloadResponse = { item: MediaItem };

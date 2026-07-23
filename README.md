@@ -1,6 +1,6 @@
 # J-YTDown
 
-A clean, ad-free media resolver UI built with Next.js, Tailwind, and a pluggable resolver API.
+A clean, ad-free media download UI built with Next.js and a private yt-dlp + FFmpeg service.
 
 ## Important
 
@@ -8,12 +8,13 @@ Only download media you own or are authorized to download. You are responsible f
 
 ## Local setup
 
-1. Copy `.env.example` to `.env.local` and set `RESOLVER_BASE_URL` to an authorized, self-hosted Cobalt-compatible resolver.
+1. Deploy `services/ytdlp` to a container platform and set its public HTTPS URL as `YTDLP_SERVICE_URL`.
+2. Set the same strong random value for `YTDLP_SERVICE_TOKEN` in both services.
 2. Run `npm install`.
 3. Run `npm run dev`.
 
-The resolver must accept a JSON `POST /` request with `url`, `downloadMode`, `audioFormat`, `audioBitrate`, `videoQuality`, and `youtubeVideoCodecPreference`, and return a Cobalt-style response containing `status`, `url`, `filename`, and optionally `audioStream`/`picker`.
+The included service accepts validated YouTube URLs, creates short-lived signed download links, and streams yt-dlp/FFmpeg output. It does not expose arbitrary command execution or persist user data.
 
 ## Deploy to Vercel
 
-Import the GitHub repository in Vercel, add `RESOLVER_BASE_URL` (and optional `RESOLVER_API_TOKEN`) under Environment Variables, then deploy. The Vercel function proxies the resolver so credentials are never exposed to the browser.
+Import the GitHub repository in Vercel, add `YTDLP_SERVICE_URL` and `YTDLP_SERVICE_TOKEN` under Environment Variables, then deploy. The Vercel API validates requests and keeps the service token off the client.
